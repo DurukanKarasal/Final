@@ -1,0 +1,114 @@
+✅ Sana özel cursor-rules.json içeriği (JSON formatı)
+json
+Kopyala
+Düzenle
+{
+  "projectType": "Full-stack Web App",
+  "techStack": ["Next.js", "Prisma", "SQLite", "Tailwind CSS", "NextAuth"],
+  "auth": {
+    "useNextAuth": true,
+    "roles": ["USER", "ADMIN"],
+    "redirectAfterRegister": "/auth/login",
+    "sessionIncludes": ["id", "role"]
+  },
+  "routes": {
+    "public": ["/auth/login", "/auth/register"],
+    "protected": ["/", "/profile", "/appointments/new", "/appointments/my"],
+    "adminOnly": ["/admin/dashboard", "/admin/users", "/admin/appointments", "/admin/complaints"]
+  },
+  "userFlows": {
+    "register": {
+      "fields": ["name", "email", "password", "phone"],
+      "redirect": "/auth/login"
+    },
+    "login": {
+      "redirect": "/"
+    },
+    "authenticatedLanding": {
+      "page": "/",
+      "content": "Kuaför reklamı, yapılan işler, iletişim, şikayet"
+    },
+    "profile": {
+      "editableFields": ["name", "email", "phone", "password"]
+    },
+    "appointments": {
+      "new": {
+        "fields": ["date", "timeSlot", "note"],
+        "validations": ["cannot book same time slot"]
+      },
+      "myAppointments": true
+    }
+  },
+  "adminFeatures": {
+    "viewAllUsers": true,
+    "editOrDeleteUsers": true,
+    "viewAllAppointments": true,
+    "viewComplaints": true,
+    "manageServices": true
+  },
+  "ui": {
+    "layout": {
+      "topRight": "Profilim butonu",
+      "topLeft": "Menü: Ana Sayfa, Randevu Al, Randevularım",
+      "theme": "Tailwind CSS, temiz modern tasarım"
+    }
+  }
+}
+🧭 Alternatif olarak: rules.md (Markdown formatı)
+md
+Kopyala
+Düzenle
+# Cursor AI Proje Kuralları
+
+## 🧰 Teknoloji Yığını
+- Next.js (Pages Router)
+- Prisma ORM + SQLite
+- Tailwind CSS
+- NextAuth.js ile kimlik doğrulama
+
+## 👥 Kullanıcı Rolleri
+- `USER`: Normal kullanıcı
+- `ADMIN`: Tüm kullanıcı yetkilerine ek olarak yönetici işlemleri yapabilir
+
+## 🔐 Giriş / Kayıt
+- `/auth/register`: Kullanıcı kayıt olur, ardından `/auth/login`'a yönlendirilir
+- `/auth/login`: Giriş yapar ve `/` sayfasına gider
+- NextAuth ile `session` içinde `user.role` ve `user.id` tutulur
+
+## 🧭 Sayfa Erişimi
+### Public (Giriş gerektirmez)
+- `/auth/login`
+- `/auth/register`
+
+### Protected (Giriş yapılmış kullanıcılar)
+- `/` (reklam, tanıtım vs.)
+- `/profile`
+- `/appointments/new`
+- `/appointments/my`
+
+### Admin Only
+- `/admin/dashboard`
+- `/admin/users`
+- `/admin/appointments`
+- `/admin/complaints`
+
+## 📄 Profil Sayfası
+- Kullanıcı bilgileri gösterilir
+- `name`, `email`, `phone`, `password` güncellenebilir
+
+## 📅 Randevu Sistemi
+- Yeni randevu: tarih + saat + açıklama
+- Aynı gün/saatte başka randevu alınamaz
+- Kullanıcı kendi randevularını görebilir
+
+## 🛠️ Admin Yetkileri
+- Tüm kullanıcıları listeleyebilir
+- Kullanıcıları güncelleyebilir veya silebilir
+- Tüm randevuları görebilir
+- Şikayetleri görebilir
+- Hizmet tanımlayabilir (kesim, boya vb.)
+
+## 🎨 UI Kuralları
+- Sağ üstte "Profilim" butonu
+- Sol üstte Menü: Ana Sayfa, Randevu Al, Randevularım
+- Responsive ve sade tasarım (Tailwind CSS)
